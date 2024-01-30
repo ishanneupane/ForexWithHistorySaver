@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:hh/app/controller/dependency_injection.dart';
 import 'package:provider/provider.dart';
 
 import 'src/calculator/provider/forex_calculator_provider.dart';
@@ -8,6 +10,7 @@ import 'src/splash/splash_state.dart';
 
 void main() {
   runApp(const MyApp());
+  DependencyInjection.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ForexCalculatorState()),
         ChangeNotifierProvider(create: (_) => CurrencyRateProvider()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Easy Office",
         theme: ThemeData(
