@@ -40,6 +40,8 @@ dependencies:
   country_flags: any
   http: any
   sqflite: any
+  connectivity_plus: any
+  get: any
 
 
 
