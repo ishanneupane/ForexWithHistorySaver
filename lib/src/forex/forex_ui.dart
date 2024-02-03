@@ -27,7 +27,7 @@ class MyHomePageState extends State<MyHomePage> {
     try {
       await state.fetchRates();
     } catch (e) {
-      print("Error fetching rates: $e");
+      //  print("Error fetching rates: $e");
       await state.getDataFromDatabase();
     }
   }
@@ -38,8 +38,8 @@ class MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue.shade900,
-        title: Center(
-          child: const Text(
+        title: const Center(
+          child: Text(
             'ELITE FOREX',
             style: TextStyle(
               color: Colors.white,
@@ -47,7 +47,7 @@ class MyHomePageState extends State<MyHomePage> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: Colors.white,
           ),
@@ -57,7 +57,7 @@ class MyHomePageState extends State<MyHomePage> {
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.refresh,
               color: Colors.white,
             ),
@@ -67,7 +67,7 @@ class MyHomePageState extends State<MyHomePage> {
                     true; // Set loading to true to show the loading screen
 
                 // Delay for 1 second and then call getData()
-                Future.delayed(Duration(seconds: 1), () {
+                Future.delayed(const Duration(seconds: 1), () {
                   getData();
                 });
               });
@@ -127,7 +127,7 @@ class MyHomePageState extends State<MyHomePage> {
             //   height: 10,
             // ),
             const Divider(),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
@@ -139,7 +139,7 @@ class MyHomePageState extends State<MyHomePage> {
               ],
             ),
             const Divider(),
-            Row(
+            const Row(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
@@ -184,19 +184,22 @@ class MyHomePageState extends State<MyHomePage> {
                               child: CountryFlag.fromCountryCode(
                                 country.iso3.substring(0, 2),
                               )),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
                             flex: 3,
                             child: Text(
                               country.name,
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                           Expanded(
-                            child: Text((buy / unit).toString(),
-                                style: TextStyle(fontSize: 16)),
+                            child: Text(
+                                (buy / unit).toString().length >= 5
+                                    ? (buy / unit).toString().substring(0, 5)
+                                    : (buy / unit).toString(),
+                                style: const TextStyle(fontSize: 16)),
                           ),
                           Expanded(
                             child: Text(
@@ -204,7 +207,7 @@ class MyHomePageState extends State<MyHomePage> {
                               (sell / unit).toString().length >= 5
                                   ? (sell / unit).toString().substring(0, 5)
                                   : (sell / unit).toString(),
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                           )
                         ],

@@ -8,8 +8,8 @@ class CurrencyRateProvider extends ChangeNotifier {
   List<Country> rates = [];
 
   Future<void> fetchRates() async {
-    await ApiofCurrencyRate().fetchRates().then((value) async {
-      await Sqlhelper.deleteAll();
+    await ApiOfCurrencyRate().fetchRates().then((value) async {
+      await SqlHelper.deleteAll();
       await saveToDb(value);
     });
 
@@ -17,19 +17,19 @@ class CurrencyRateProvider extends ChangeNotifier {
   }
 
   getDataFromDatabase() async {
-    rates = await Sqlhelper.getItems();
+    rates = await SqlHelper.getItems();
     notifyListeners();
   }
 
   Future<void> saveToDb(List<Country> value) async {
+    SqlHelper.createItem("NP", "NEPAL", "100", "100", "100");
     for (var id = 0; id < value.length; id++) {
       String buy = value[id].buy;
       String sell = value[id].sell;
       String name = value[id].name;
       String unit = value[id].unit.toString();
       String iso3 = value[id].iso3;
-
-      await Sqlhelper.createItem(iso3, name, sell, unit, buy);
+      await SqlHelper.createItem(iso3, name, sell, unit, buy);
     }
 
     await getDataFromDatabase();

@@ -10,9 +10,11 @@ class ForexCalculatorState extends ChangeNotifier {
 
   List<Country> countryList = [];
   Future<void> getCountryList() async {
-    countryList = await Sqlhelper.getItems();
-    selectedCountry1 = countryList[0];
-    selectedCountry2 = countryList[1];
+    countryList = await SqlHelper.getItems();
+    selectedCountry1 =
+        countryList.isNotEmpty ? countryList[0] : Country.fromJson({});
+    selectedCountry2 =
+        countryList.isNotEmpty ? countryList[0] : Country.fromJson({});
 
     notifyListeners();
   }
@@ -24,8 +26,7 @@ class ForexCalculatorState extends ChangeNotifier {
 
     double toCurrencyUnit = double.parse(selectedCountry2.unit);
     double fromCurrencyUnit = double.parse(selectedCountry1.unit);
-    SqlHistory.createItem(
-        converted, converted, selectedCountry1.name, selectedCountry2.name);
+
     return converted =
         (toCurrencyBuy / fromCurrencyUnit * toCurrencyUnit / fromCurrencySell);
   }

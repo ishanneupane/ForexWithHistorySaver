@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
                 fixedSize: const Size(double.infinity, 40),
               ),
             )),
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

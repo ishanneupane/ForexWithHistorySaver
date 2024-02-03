@@ -2,7 +2,7 @@ import 'package:sqflite/sqflite.dart' as sql;
 
 import '../model/forex_model.dart';
 
-class Sqlhelper {
+class SqlHelper {
   static Future<void> createTables(sql.Database database) async {
     await database.rawQuery('''
   CREATE TABLE country(
@@ -26,7 +26,7 @@ class Sqlhelper {
 
   static Future<int> createItem(
       String iso3, String name, String sell, String unit, String buy) async {
-    final db = await Sqlhelper.db();
+    final db = await SqlHelper.db();
     final data = {
       "name": name,
       "unit": unit,
@@ -40,7 +40,7 @@ class Sqlhelper {
   }
 
   static Future<List<Country>> getItems() async {
-    final db = await Sqlhelper.db();
+    final db = await SqlHelper.db();
     List<Map<String, dynamic>> results =
         await db.query("country", orderBy: "id");
 
@@ -58,13 +58,13 @@ class Sqlhelper {
   }
 
   static Future<List<Map<String, dynamic>>> getItem(int id) async {
-    final db = await Sqlhelper.db();
+    final db = await SqlHelper.db();
     return db.query("country", where: "id=?", whereArgs: [id], limit: 1);
   }
 
   static Future<int> updateItem(
       int id, String name, String sell, String unit, String buy) async {
-    final db = await Sqlhelper.db();
+    final db = await SqlHelper.db();
     final data = {"name": name, "buy": buy, "sell": sell, "unit": unit};
     final result =
         await db.update("country", data, where: "id=?", whereArgs: [id]);
@@ -72,7 +72,7 @@ class Sqlhelper {
   }
 
   static Future<void> deleteAll() async {
-    final db = await Sqlhelper.db();
+    final db = await SqlHelper.db();
     try {
       await db.delete("country");
     } catch (e) {
@@ -81,7 +81,7 @@ class Sqlhelper {
   }
 
   static Future<void> deleteItem(int id) async {
-    final db = await Sqlhelper.db();
+    final db = await SqlHelper.db();
     try {
       await db.delete("country", where: "id=?", whereArgs: [id]);
     } catch (e) {

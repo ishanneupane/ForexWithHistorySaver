@@ -54,6 +54,11 @@ class ExchangeCalculatorState extends State<ExchangeCalculator> {
           color: Colors.grey.shade100, borderRadius: BorderRadius.circular(10)),
       child: Consumer<ForexCalculatorState>(
         builder: (_, state, child) {
+          double finalOutput() {
+            double output = state.calculation() * inputOfUser();
+            return output;
+          }
+
           return Column(
             children: [
               Row(
@@ -109,7 +114,7 @@ class ExchangeCalculatorState extends State<ExchangeCalculator> {
                           // onChanged: (value) {
                           //  setState(() {});
                           // },
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '1',
                           ),
                         ),
@@ -131,6 +136,11 @@ class ExchangeCalculatorState extends State<ExchangeCalculator> {
                         ) {
                           if (value2 != null) {
                             setState(() {
+                              SqlHistory.createItem(
+                                  inputOfUser(),
+                                  finalOutput(),
+                                  state.selectedCountry1.name,
+                                  state.selectedCountry2.name);
                               state.selectedCountry2 = value2;
                               // state.calculation();
                             });
@@ -147,7 +157,7 @@ class ExchangeCalculatorState extends State<ExchangeCalculator> {
                                     child: CountryFlag.fromCountryCode(
                                       value.iso3.substring(0, 2),
                                     )),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
                                 Text(value.name,
@@ -164,8 +174,7 @@ class ExchangeCalculatorState extends State<ExchangeCalculator> {
                         width: MediaQuery.of(context).size.width * 0.35,
                         height: MediaQuery.of(context).size.height * 0.03,
                         child: Text(
-                          (state.calculation() * inputOfUser())
-                              .toStringAsFixed(3),
+                          (finalOutput()).toStringAsFixed(3),
                           style: const TextStyle(fontSize: 20),
                         ),
                       ),
@@ -173,7 +182,7 @@ class ExchangeCalculatorState extends State<ExchangeCalculator> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -185,9 +194,14 @@ class ExchangeCalculatorState extends State<ExchangeCalculator> {
                             Colors.blue.shade900),
                       ),
                       onPressed: () {
+                        SqlHistory.createItem(
+                            inputOfUser(),
+                            finalOutput(),
+                            state.selectedCountry1.name,
+                            state.selectedCountry2.name);
                         setState(() {});
                       },
-                      child: Text(
+                      child: const Text(
                         "Submit",
                         style: TextStyle(color: Colors.white),
                       )),
