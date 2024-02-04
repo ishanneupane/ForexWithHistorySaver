@@ -19,15 +19,43 @@ class ForexCalculatorState extends ChangeNotifier {
     notifyListeners();
   }
 
-  calculation() {
+  double calculation() {
     double converted = 0.0;
-    double fromCurrencySell = double.parse(selectedCountry1.sell);
-    double toCurrencyBuy = double.parse(selectedCountry2.buy);
 
-    double toCurrencyUnit = double.parse(selectedCountry2.unit);
-    double fromCurrencyUnit = double.parse(selectedCountry1.unit);
+    try {
+      double fromCurrencySell = double.parse(selectedCountry1.sell);
+      double toCurrencyBuy = double.parse(selectedCountry2.buy);
+      double toCurrencyUnit = double.parse(selectedCountry2.unit);
+      double fromCurrencyUnit = double.parse(selectedCountry1.unit);
 
-    return converted =
-        (toCurrencyBuy / fromCurrencyUnit * toCurrencyUnit / fromCurrencySell);
+      if (fromCurrencyUnit != 0 && fromCurrencySell != 0) {
+        converted = (toCurrencyBuy /
+            fromCurrencyUnit *
+            toCurrencyUnit /
+            fromCurrencySell);
+      } else {
+        converted = 0.0;
+      }
+    } catch (e) {
+      //print('Error parsing double: $e');
+      // Handle the error, provide default values, or show an error message
+      // Provide a default value when parsing fails
+      converted = 0.0;
+    }
+
+    return converted;
   }
+
+//
+  // calculation() {
+  //   double converted = 0.0;
+  //   double fromCurrencySell = double.parse(selectedCountry1.sell);
+  //   double toCurrencyBuy = double.parse(selectedCountry2.buy);
+  //
+  //   double toCurrencyUnit = double.parse(selectedCountry2.unit);
+  //   double fromCurrencyUnit = double.parse(selectedCountry1.unit);
+  //
+  //   return converted =
+  //       (toCurrencyBuy / fromCurrencyUnit * toCurrencyUnit / fromCurrencySell);
+  // }
 }
