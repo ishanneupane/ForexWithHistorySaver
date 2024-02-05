@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "Easy Office",
         theme: ThemeData(
             primarySwatch: Colors.cyan,
             primaryColor: Colors.cyanAccent,
