@@ -66,14 +66,14 @@ class _SplashScreenState extends State<SplashScreen> {
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    ' Elite ',
+                    ' Ishaan ',
                     style: TextStyle(
                         fontSize: 15,
                         color: Colors.red,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
-                    'Software',
+                    'Neupane',
                     style: TextStyle(
                         fontSize: 15,
                         color: Colors.blue,

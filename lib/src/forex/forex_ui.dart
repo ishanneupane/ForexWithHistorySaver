@@ -128,18 +128,6 @@ class MyHomePageState extends State<MyHomePage> {
             // ),
             const Divider(),
             const Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                SizedBox(
-                  child: Text(
-                    "Updated at 2024/01/29",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-              ],
-            ),
-            const Divider(),
-            const Row(
               //mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
